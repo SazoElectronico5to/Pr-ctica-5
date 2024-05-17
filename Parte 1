@@ -1,0 +1,72 @@
+*
+   Fundacion Kinal
+   Centro Educativo Tecnico Laboral Kinal
+   Quinto Perito
+   Quinto Electronica
+   Codigo Tecnico: EB5AM / EB5AV 
+   Curso: Taller de electronica digital y reparacion de computadoras I
+   Proyecto: Parte 1 Practica 5
+   Dev: José Pablo Sazo Solares
+   Fecha: 10 de Mayo
+*/
+
+float a = 20;
+float b = 2.2046; // Cambiado a float para la conversión
+float c = 50;
+float d = 1000000;
+float respuesta;
+float respuestados;
+int i = 0;
+const int A = 2;
+const int B = 3;
+const int C = 4;
+const int D = 5;
+const int E = 6;
+const int F = 7;
+const int G = 8;
+const int N = 7;
+const int SEGMENTOS[N] = {A, B, C, D, E, F, G};
+const int DIGITOS[5][N] = {
+  /*1*/ {0, 1, 1, 0, 0, 0, 0},
+  /*3*/ {1, 1, 1, 1, 0, 0, 1},
+  /*5*/ {1, 0, 1, 1, 0, 1, 1},
+  /*7*/ {1, 1, 1, 0, 0, 0, 0},
+  /*9*/ {1, 1, 1, 1, 0, 1, 1},
+};
+const int OFF = LOW;
+
+void setup() {
+  Serial.begin(9600); // Para depuración en el monitor serie
+  for (int i=0; i<N; i++) {
+    pinMode(SEGMENTOS[i], OUTPUT);
+    digitalWrite(SEGMENTOS[i], OFF);
+  }
+}
+
+void print(int d) {
+  for (int i=0; i<N; i++) {
+    digitalWrite(SEGMENTOS[i], DIGITOS[d][i]);
+  }
+}
+
+void loop() {
+  respuesta = conversiones(a, b);
+  Serial.println(respuesta);
+  respuestados = conversionesdos(c, d);
+  Serial.println(respuestados);
+  delay(1000);
+
+  for (int i=0; i<5; i++) { 
+    print(i);
+    delay(1000);
+  }
+}
+int conversiones(float a, float b) {
+  int resultado = a * b;
+  return resultado;
+}
+
+int conversionesdos(float c, float d) {
+  int resultado = c * d;
+  return resultado;
+}
